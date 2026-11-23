@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetworkAI Side Panel</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <!-- Top Header -->
+    <header class="header">
+      <div class="logo-group">
+        <div class="logo-icon">⚡</div>
+        <div>
+          <h2>NetworkAI</h2>
+          <span class="sub-status" id="connection-status">Ready</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 6px; align-items: center;">
+        <button id="settings-toggle-btn" class="icon-btn" title="API Settings">⚙️</button>
+        <button id="refresh-context-btn" class="icon-btn" title="Detect page">⟳</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Settings Panel (Collapsible) -->
+      <section id="settings-panel" class="card hidden" style="border-color: #3b82f6;">
+        <div class="draft-header">
+          <h4>Backend API Endpoint</h4>
+          <span class="pill" id="current-env-pill">Local</span>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+          Set to local dev or your deployed Railway URL:
+        </p>
+        <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+          <input
+            type="text"
+            id="api-url-input"
+            value="http://localhost:8000"
+            style="flex: 1; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; color: #fff; font-size: 11px; outline: none;"
+          />
+          <button id="save-url-btn" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px;">
+            Save
+          </button>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button id="set-local-btn" class="icon-btn" style="width: auto; padding: 4px 8px; font-size: 10px;">
+            localhost:8000
+          </button>
+          <button id="test-connection-btn" class="icon-btn" style="width: auto; padding: 4px 8px; font-size: 10px;">
+            Test Connection
+          </button>
+        </div>
+      </section>
+
+      <!-- Target Profile Info Box -->
+      <section class="card profile-box">
+        <div class="profile-header">
+          <div>
+            <h3 id="target-name">Detecting page...</h3>
+            <p id="target-headline" class="headline">Open a LinkedIn profile or post</p>
+          </div>
+          <span id="relevance-badge" class="badge badge-hidden">95% Match</span>
+        </div>
+        <p id="target-url" class="target-url"></p>
+        <button id="analyze-btn" class="btn btn-primary full-width">
+          ✨ Analyze Current Page
+        </button>
+      </section>
+
+      <!-- Shared Hooks Section (Initially Hidden) -->
+      <section id="hooks-section" class="card hidden">
+        <h4>Shared Hooks</h4>
+        <div id="hooks-container" class="hooks-list"></div>
+      </section>
+
+      <!-- Draft Generation & Editing Section -->
+      <section id="draft-section" class="card hidden">
+        <div class="draft-header">
+          <h4>Generated Draft</h4>
+          <span id="action-type-pill" class="pill">Connection Note</span>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea id="draft-textarea" rows="4" placeholder="AI draft will appear here..."></textarea>
+          <div class="counter-bar">
+            <span>Edit before copying</span>
+            <span id="char-counter" class="counter">0/300</span>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <button id="approve-copy-btn" class="btn btn-success full-width">
+          📋 Approve & Copy
+        </button>
+      </section>
+
+      <!-- Toast Notification -->
+      <div id="toast" class="toast hidden">Copied to clipboard!</div>
+    </div>
+
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
